@@ -1,31 +1,18 @@
 
 import pandas as pd
+from pandas.plotting import scatter_matrix
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import root_mean_squared_error, mean_absolute_error, r2_score
-from pandas.plotting import scatter_matrix
-from sklearn.model_selection import StratifiedShuffleSplit
+from sklearn.model_selection import train_test_split, StratifiedShuffleSplit, cross_val_score
 from sklearn.linear_model import LinearRegression, Ridge, ElasticNet, Lasso
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-from sklearn.preprocessing import StandardScaler
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import classification_report, confusion_matrix
-from sklearn.tree import plot_tree
+from sklearn.metrics import root_mean_squared_error, mean_squared_error, mean_absolute_error, r2_score, classification_report, confusion_matrix, ConfusionMatrixDisplay, roc_curve, auc
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier
-from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import ConfusionMatrixDisplay
-from sklearn.metrics import roc_curve, auc
-
-
-# We Load the 'titantic' dataset via sns.load_dataset
-#titanic_test = sns.load_dataset('titanic')
 
 # Replace 'your_file.csv' with the actual name of your CSV file
 df = pd.read_csv('data/titanic_train.csv')
