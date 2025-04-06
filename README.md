@@ -4,7 +4,10 @@
 #### 555-555-5555; arealemail@email.com
 
 ## Overview
-This README covers the overall structure of the Midterm Project and Preliminary Setup Steps. Please see the 'midterm_fintel.ipynb' for project and analysis details.
+This README covers the overall structure of the Midterm Project and Preliminary Setup Steps. Please see the 'ml_classification_fintel.ipynb' for project and analysis details.
+
+Here is the project notebook: 
+Here is a project peer review:
 
 ### Project Structure
 - Section 1: Import and Inspect the Data
