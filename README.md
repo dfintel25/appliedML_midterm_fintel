@@ -6,8 +6,8 @@
 ## Overview
 This README covers the overall structure of the Midterm Project and Preliminary Setup Steps. Please see the 'ml_classification_fintel.ipynb' for project and analysis details.
 
-Here is the project notebook: 
-Here is a project peer review:
+Here is the project notebook: https://github.com/dfintel25/appliedML_midterm_fintel/blob/main/ml_classification_fintel.ipynb
+Here is a project peer review: (https://github.com/dfintel25/appliedML_midterm_fintel/blob/main/peer_review.md)
 
 ### Project Structure
 - Section 1: Import and Inspect the Data
