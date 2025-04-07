@@ -157,6 +157,28 @@ plot_tree(tree_model, feature_names=X.columns, class_names=['Not Survived', 'Sur
 plt.show()
 fig.savefig("decision_tree_titanic.png")
 
+#This function calculates the R^2 of the trained data.
+#r2 = r2_score(y_test, y_pred)
+#print(f'R²: {r2:.2f}')
+#This function calculates the MAE for the trained data.
+#mae = mean_absolute_error(y_test, y_pred)
+#print(f'MAE: {mae:.2f}')
+#This function calculates the RMSE of the trained data.
+#rmse = root_mean_squared_error(y_test, y_pred)
+#print(f'RMSE: {rmse:.2f}')
+
+from sklearn.metrics import accuracy_score
+
+# Predict on the test set
+y_test_pred = tree_model.predict(X_test)
+
+# Use classification metrics
+print("Classification Metrics:")
+print(f"Accuracy: {accuracy_score(y_test, y_test_pred):.2f}")
+print(f"MAE: {mean_absolute_error(y_test, y_test_pred):.2f}")
+print(f"RMSE: {mean_squared_error(y_test, y_test_pred, squared=False):.2f}")
+print(f"R²: {r2_score(y_test, y_test_pred):.2f}")
+
 models = {
     'Decision Tree': DecisionTreeClassifier(random_state=42),
     'SVM': SVC(kernel='rbf', probability=True),
@@ -172,16 +194,94 @@ for name, model in models.items():
     print(confusion_matrix(y_test, y_pred))
     print(classification_report(y_test, y_pred))
 
+# Finally we build a Confusion Matrix on the results.
 ConfusionMatrixDisplay.from_estimator(models['Decision Tree'], X_test, y_test, cmap='Blues')
 plt.title('Confusion Matrix: Decision Tree')
 plt.show()
+ConfusionMatrixDisplay.from_estimator(models['SVM'], X_test, y_test, cmap='Blues')
+plt.title('Confusion Matrix: SVM')
+plt.show()
+ConfusionMatrixDisplay.from_estimator(models['MLP'], X_test, y_test, cmap='Blues')
+plt.title('Confusion Matrix: MLP')
+plt.show()
+ConfusionMatrixDisplay.from_estimator(models['Random Forest'], X_test, y_test, cmap='Blues')
+plt.title('Confusion Matrix: Random Forest')
+plt.show()
+ConfusionMatrixDisplay.from_estimator(models['KNN'], X_test, y_test, cmap='Blues')
+plt.title('Confusion Matrix: KNN')
+plt.show()
+
 
 for name, model in models.items():
     scores = cross_val_score(model, X, y, cv=5)
     print(f"{name}: Mean accuracy = {scores.mean():.2f}")
 
-# Example for ROC curve with SVM
+# ROC Curve of 'Decision Tree'
+y_pred_prob = models['Decision Tree'].predict_proba(X_test)[:, 1]
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
+roc_auc = auc(fpr, tpr)
+
+plt.figure()
+plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic')
+plt.legend(loc="lower right")
+plt.show()
+
+# ROC Curve of 'SVM'
 y_pred_prob = models['SVM'].predict_proba(X_test)[:, 1]
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
+roc_auc = auc(fpr, tpr)
+
+plt.figure()
+plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic')
+plt.legend(loc="lower right")
+plt.show()
+
+# ROC Curve of 'MLP'
+y_pred_prob = models['MLP'].predict_proba(X_test)[:, 1]
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
+roc_auc = auc(fpr, tpr)
+
+plt.figure()
+plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic')
+plt.legend(loc="lower right")
+plt.show()
+
+# ROC Curve of 'Random Forest'
+y_pred_prob = models['Random Forest'].predict_proba(X_test)[:, 1]
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
+roc_auc = auc(fpr, tpr)
+
+plt.figure()
+plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic')
+plt.legend(loc="lower right")
+plt.show()
+
+# ROC Curve of 'KNN'
+y_pred_prob = models['KNN'].predict_proba(X_test)[:, 1]
 fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
 roc_auc = auc(fpr, tpr)
 
