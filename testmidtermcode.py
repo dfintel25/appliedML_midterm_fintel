@@ -6,13 +6,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split, StratifiedShuffleSplit, cross_val_score
 from sklearn.linear_model import LinearRegression, Ridge, ElasticNet, Lasso
-from sklearn.metrics import root_mean_squared_error, mean_squared_error, mean_absolute_error, r2_score, classification_report, confusion_matrix, ConfusionMatrixDisplay, roc_curve, auc
+from sklearn.metrics import root_mean_squared_error, mean_squared_error, mean_absolute_error, r2_score, classification_report, confusion_matrix, ConfusionMatrixDisplay, roc_curve, auc, accuracy_score
 from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
+
 
 # Replace 'your_file.csv' with the actual name of your CSV file
 df = pd.read_csv('data/titanic_train.csv')
@@ -156,18 +157,6 @@ fig = plt.figure(figsize=(25,10))
 plot_tree(tree_model, feature_names=X.columns, class_names=['Not Survived', 'Survived'], filled=True)
 plt.show()
 fig.savefig("decision_tree_titanic.png")
-
-#This function calculates the R^2 of the trained data.
-#r2 = r2_score(y_test, y_pred)
-#print(f'R²: {r2:.2f}')
-#This function calculates the MAE for the trained data.
-#mae = mean_absolute_error(y_test, y_pred)
-#print(f'MAE: {mae:.2f}')
-#This function calculates the RMSE of the trained data.
-#rmse = root_mean_squared_error(y_test, y_pred)
-#print(f'RMSE: {rmse:.2f}')
-
-from sklearn.metrics import accuracy_score
 
 # Predict on the test set
 y_test_pred = tree_model.predict(X_test)
